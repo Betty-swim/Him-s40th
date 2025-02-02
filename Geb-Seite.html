@@ -10,7 +10,7 @@
             padding: 20px;
         }
         header {
-            background-color: #333;
+            background-color: #464;
             color: white;
             padding: 10px 0;
             text-align: center;
@@ -38,18 +38,23 @@
             margin: 20px auto;
         }
         button {
-            display: block;
-            margin: 20px auto;
             padding: 10px 20px;
-            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
-        .hidden-article {
-            display: none;
+        button:hover {
+            background-color: #45a049;
+        }
+        .extra-text {
             margin-top: 20px;
             background-color: #e0e0e0;
             padding: 15px;
             border-radius: 5px;
+            display: none;
         }
     </style>
 </head>
@@ -80,21 +85,21 @@
     </section>
     <section id="tipps">
         <h3>Tipps</h3>
-        <p>Naa, überleg nochmal, bevor du dir wirklich einen Tipp holst ;P</p>
-        <button>Weiter</button>
-        <article id="extra-article1" class="hidden-article">
-            <h3>Extra Artikel 1</h3>
+        <p id="main-text">Naa, überleg nochmal, bevor du dir wirklich einen Tipp holst ;-P</p>
+        <button id="weiter-button">Weiter</button>
+        <div id="extra-text1" class="extra-text">
+            <h3>Tipp 1</h3>
             <p>Die Beschreibung ist schwarz-weiß</p>
-        </article>
-        <article id="extra-article2" class="hidden-article">
-            <h3>Extra Artikel 2</h3>
+        </div>
+        <div id="extra-text2" class="extra-text">
+            <h3>Tipp 2</h3>
             <p>Suche in einem Möbelstück links vom Fenster</p>
-        </article>
+        </div>
     </section>
     <section id="contact">
         <h4>Kontakt</h4>
         <p>Name: Flipper</p>
-        <p>Adresse: ABZ9</p>
+        <p>Adresse: beim Faultier</p>
     </section>
     <script>
         function showSection(id) {
@@ -104,21 +109,28 @@
             });
             document.getElementById(id).classList.add('active');
         }
+		// Zähler für die Anzahl der Klicks auf den "Weiter"-Button
+        let clickCount = 0;
 
-        function showNextArticle() {
-            var articles = document.querySelectorAll('.hidden-article');
-            for (var i = 0; i < articles.length; i++) {
-                if (articles[i].style.display === 'none') {
-                    articles[i].style.display = 'block';
-                    break;
-                }
+        function showNextText() {
+            clickCount++;
+
+            if (clickCount === 1) {
+                // Erster Klick: Zeige den ersten Tipp
+                document.getElementById("extra-text1").style.display = 'block';
+            }
+            if (clickCount === 2) {
+                // Zweiter Klick: Zeige den zweiten Tipp
+                document.getElementById("extra-text2").style.display = 'block';
+            }
+            if (clickCount === 2) {
+                // Beim zweiten Klick den Button ausblenden
+                document.getElementById("weiter-button").style.display = 'none';
             }
         }
 
-        // Sicherstellen, dass die Funktion nach dem Laden des DOMs aufgerufen wird
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelector("button").addEventListener("click", showNextArticle);
-        });
+        // Füge einen Event-Listener zum Button hinzu, der beim Klicken die Funktion ausführt
+        document.getElementById("weiter-button").addEventListener("click", showNextText);
     </script>
 </body>
 </html>
