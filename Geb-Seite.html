@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Birthday Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            margin: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        section {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        section.active {
+            display: block;
+        }
+        audio {
+            display: block;
+            margin: 20px auto;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .hidden-article {
+            display: none;
+            margin-top: 20px;
+            background-color: #e0e0e0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body onload="showSection('home')">
+    <header>
+        <h1>Willkommen auf deiner Geburtstagsseite!</h1>
+    </header>
+    <nav>
+        <a href="javascript:void(0)" onclick="showSection('home')">Home</a>
+        <a href="javascript:void(0)" onclick="showSection('tipps')">Tipps</a>
+        <a href="javascript:void(0)" onclick="showSection('contact')">Kontakt</a>
+    </nav>
+    <section id="home">
+        <article>
+            <h2>Herzlichen Glückwunsch, du hast den QR-Code erfolgreich gescannt!</h2>
+            <p>Und was jetzt?</p>
+            <p>Schau mal im Arbeitszimmer... dort gibt es doch sowas, wie deine Berufsbeschreibung, oder?</p>
+            <p>Da wirst du sicher fündig.</p>
+            <audio autoplay>
+                <source src="Kool_and_The_Gang_Celebration.mp3" type="audio/mpeg">
+                Dein Browser unterstützt das Audio-Tag nicht.
+            </audio>
+            <audio controls>
+                <source src="Kool_and_The_Gang_Celebration.mp3" type="audio/mpeg">
+                Dein Browser unterstützt das Audio-Tag nicht.
+            </audio>
+        </article>
+    </section>
+    <section id="tipps">
+        <h3>Tipps</h3>
+        <p>Naa, überleg nochmal, bevor du dir wirklich einen Tipp holst ;P</p>
+        <button>Weiter</button>
+        <article id="extra-article1" class="hidden-article">
+            <h3>Extra Artikel 1</h3>
+            <p>Die Beschreibung ist schwarz-weiß</p>
+        </article>
+        <article id="extra-article2" class="hidden-article">
+            <h3>Extra Artikel 2</h3>
+            <p>Suche in einem Möbelstück links vom Fenster</p>
+        </article>
+    </section>
+    <section id="contact">
+        <h4>Kontakt</h4>
+        <p>Name: Flipper</p>
+        <p>Adresse: ABZ9</p>
+    </section>
+    <script>
+        function showSection(id) {
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+            document.getElementById(id).classList.add('active');
+        }
+
+        function showNextArticle() {
+            var articles = document.querySelectorAll('.hidden-article');
+            for (var i = 0; i < articles.length; i++) {
+                if (articles[i].style.display === 'none') {
+                    articles[i].style.display = 'block';
+                    break;
+                }
+            }
+        }
+
+        // Sicherstellen, dass die Funktion nach dem Laden des DOMs aufgerufen wird
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector("button").addEventListener("click", showNextArticle);
+        });
+    </script>
+</body>
+</html>
